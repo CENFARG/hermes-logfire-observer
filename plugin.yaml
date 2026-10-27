@@ -1,0 +1,27 @@
+name: logfire_observer
+version: 0.1.0
+manifest_version: 2
+description: >-
+  Read-only telemetry observer: exports Hermes execution spans to Logfire
+  (or any OTLP/HTTP JSON endpoint) using OpenTelemetry GenAI conventions.
+  Registers observer hooks only and never changes agent behavior.
+author: CENF
+license: MIT
+tags:
+  - observability
+  - telemetry
+  - logfire
+  - opentelemetry
+  - otlp
+provides_hooks:
+  - pre_api_request
+  - post_api_request
+  - api_request_error
+  - pre_tool_call
+  - post_tool_call
+  - pre_llm_call
+  - post_llm_call
+  - on_session_start
+  - on_session_end
+capabilities: []
+python_dependencies: []

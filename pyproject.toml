@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-logfire-observer"
+version = "0.1.0"
+description = "Read-only Hermes Agent observer plugin exporting OTel GenAI spans to Logfire via OTLP/HTTP JSON (stdlib only)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "CENF" }]
+keywords = ["hermes", "logfire", "opentelemetry", "otel", "observability", "telemetry"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0,<9", "ruff>=0.4"]
+
+[project.entry-points."hermes_agent.plugins"]
+logfire_observer = "logfire_observer.plugin:register"
+
+[tool.setuptools]
+packages = ["logfire_observer"]
+
+[tool.ruff.lint.per-file-ignores]
+# Hermes loads the plugin directory by its repo name (hyphens included) via
+# importlib naming; the hyphen is never used as a Python identifier.
+"__init__.py" = ["N999"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
